@@ -15,17 +15,17 @@ metadata:
     alb.ingress.kubernetes.io/load-balancer-attributes: routing.http2.enabled=false
     alb.ingress.kubernetes.io/target-type: ip
     kubernetes.io/ingress.class: alb   
-    alb.ingress.kubernetes.io/actions.forward-single-tg: >
-      {"type":"forward","targetGroupARN": "arn:aws:elasticloadbalancing:us-west-2:252078852689:targetgroup/maintainance-page/924975b54d7ad33b"}
+    alb.ingress.kubernetes.io/actions.redirect-to-eks: >
+     {"Type":"redirect","RedirectConfig":{"Host":"myapp.visakhkk.cf.s3-website-us-west-2.amazonaws.com","Path":"/","Port":"80","Protocol":"HTTP","StatusCode":"HTTP_301"}}
 spec:
   rules:
   - host: "myapp.visakhkk.cf"
     http: 
       paths:
-      - pathType: Prefix
-        path: "/"
+      - pathType: Exact
+        path: /
         backend:
           service:
-            name: forward-single-tg
+            name: redirect-to-eks
             port:
               name: use-annotation

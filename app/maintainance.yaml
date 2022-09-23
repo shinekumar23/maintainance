@@ -17,7 +17,7 @@ metadata:
     kubernetes.io/ingress.class: alb
     external-dns.alpha.kubernetes.io/hostname: myapp.visakhkk.cf
 spec:
-  rules:
+  - host: "myapp.visakhkk.cf"
     http: 
       paths:
       - pathType: Prefix
@@ -26,4 +26,4 @@ spec:
           service:
             name: poc-standby
             port:
-              name: use-annotation
+              number: 80

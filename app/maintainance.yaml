@@ -8,23 +8,23 @@ metadata:
     external-dns.alpha.kubernetes.io/set-identifier: my-app-ingress1
     external-dns.alpha.kubernetes.io/aws-failover: SECONDARY
     external-dns.alpha.kubernetes.io/aws-evaluate-target-health: 'true'
-    external-dns.alpha.kubernetes.io/aws-health-check-id: 27ef3202-54b1-413a-b6f5-f9d3d2754f70
+    external-dns.alpha.kubernetes.io/aws-health-check-id: 6e79152b-08e8-4ca3-846e-82ab92171e05
     alb.ingress.kubernetes.io/group.name: sandboxnew
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/load-balancer-attributes: routing.http2.enabled=false
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/target-type: ip
     kubernetes.io/ingress.class: alb   
+    alb.ingress.kubernetes.io/actions.forward-single-tg: {"type":"forward","targetGroupARN": "arn:aws:elasticloadbalancing:us-west-2:252078852689:targetgroup/maintainance-page/924975b54d7ad33b"}
 spec:
   rules:
   - host: "myapp.visakhkk.cf"
     http: 
       paths:
       - pathType: Prefix
-        path: /
+        path: "/"
         backend:
           service:
-            name: poc-standby
+            name: forward-single-tg
             port:
-              number: 80
+              name: use-annotation

@@ -14,17 +14,16 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/load-balancer-attributes: routing.http2.enabled=false
     alb.ingress.kubernetes.io/target-type: ip
-    kubernetes.io/ingress.class: alb   
-    external-dns.alpha.kubernetes.io/hostname: myapp.visakhkk.cf.s3-website-us-west-2.amazonaws.com
+    kubernetes.io/ingress.class: alb
+    external-dns.alpha.kubernetes.io/hostname: myapp.visakhkk.cf
 spec:
   rules:
-  - host: "myapp.visakhkk.cf"
     http: 
       paths:
-      - pathType: Exact
+      - pathType: Prefix
         path: /
         backend:
           service:
-            name: hostname
+            name: poc-standby
             port:
               name: use-annotation

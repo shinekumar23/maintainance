@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-app
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      imagePullSecrets:
+      - name: interfilesecret
+      containers:
+        - name: my-app
+          image: interfileusa.registry.jetbrains.space/p/smart-city-sandbox/containers/myimage:0.0.30
+          resources:
+              requests:
+                cpu: "250m"
+              limits:
+                cpu: "500m"

@@ -26,4 +26,6 @@ spec:
         backend:
           service:
             name: poc-standby
+            port:
+              number: 80
 
